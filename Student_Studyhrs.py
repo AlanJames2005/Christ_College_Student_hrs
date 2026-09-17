@@ -1,4 +1,3 @@
-```python
 import streamlit as st
 import pandas as pd
 import joblib
@@ -31,4 +30,3 @@ if st.button("Predict"):
         st.error(f"Predicted Result: FAIL ({probability:.1%} confidence)")
 
     st.info(f"Attendance entered: {attendance:.0f}%")
-```

@@ -9,7 +9,6 @@ model = joblib.load(model_path)
 st.title("Student Pass Predictor")
 st.write("Enter the number of hours studied to predict the result.")
 
-
 study_hours = st.number_input(
     "Study hours",
     min_value=0.0,
@@ -17,8 +16,11 @@ study_hours = st.number_input(
 )
 
 if st.button("Predict"):
+
+    feature_name = model.feature_names_in_[0]
+
     input_data = pd.DataFrame({
-        "StudyHours": [study_hours]
+        feature_name: [study_hours]
     })
 
     prediction = model.predict(input_data)[0]

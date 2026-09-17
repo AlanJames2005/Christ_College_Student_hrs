@@ -7,7 +7,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 
 
-model_path = BASE_DIR / "student_pass_fail_model_modify.pkl"
+model_path = BASE_DIR / "student_pass_fail_model.pkl"
 
 
 if not model_path.exists():

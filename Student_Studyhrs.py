@@ -4,10 +4,15 @@ import joblib
 from pathlib import Path
 
 model_path = Path(__file__).parent / "student_pass_fail_model.pkl"
+
+if not model_path.exists():
+    st.error("Model file not found!")
+    st.stop()
+
 model = joblib.load(model_path)
 
 st.title("Student Pass Predictor")
-st.write("Enter the number of hours studied.")
+st.write("Enter the student's study hours and attendance.")
 
 study_hours = st.number_input(
     "Study Hours",
@@ -17,12 +22,19 @@ study_hours = st.number_input(
     step=0.5
 )
 
+attendance = st.number_input(
+    "Attendance (%)",
+    min_value=0.0,
+    max_value=100.0,
+    value=75.0,
+    step=1.0
+)
+
 if st.button("Predict"):
 
-    name = model.feature_names_in_[0]
-
     input_data = pd.DataFrame({
-        name: [study_hours]
+        "Study Hours": [study_hours],
+        "Attendence": [attendance]
     })
 
     prediction = model.predict(input_data)[0]
